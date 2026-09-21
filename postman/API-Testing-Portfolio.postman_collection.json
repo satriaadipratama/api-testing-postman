@@ -2,7 +2,7 @@
   "info": {
     "_postman_id": "0031c38f-1507-41cd-bc34-c923cfaa9ccf",
     "name": "API Testing Portfolio",
-    "description": "### Welcome to Postman! This is your first collection. \n\nCollections are your starting point for building and testing APIs. You can use this one to:\n\n• Group related requests\n• Test your API in real-world scenarios\n• Document and share your requests\n\nUpdate the name and overview whenever you’re ready to make it yours.\n\n[Learn more about Postman Collections.](https://learning.postman.com/docs/collections/collections-overview/)",
+    "description": "API testing portfolio project using Postman and DummyJSON REST API.\n\nThis collection covers functional API testing, positive and negative testing, CRUD operations, response validation, and authentication testing using automated Postman assertions.\n\nTest scenarios include product retrieval, product creation, product update, product deletion, user authentication, and authenticated endpoint access.",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "_exporter_id": "57925186",
     "_collection_link": "https://go.postman.co/collection/57925186-0031c38f-1507-41cd-bc34-c923cfaa9ccf?source=collection_link"
@@ -76,7 +76,7 @@
             "999999"
           ]
         },
-        "description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+        "description": "Verify that the API returns the expected error response when requesting a product that does not exist.\n\nExpected result:\n\n- HTTP status code: 404\n    \n- Product not found message is returned"
       },
       "response": []
     },
@@ -117,7 +117,7 @@
             "add"
           ]
         },
-        "description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+        "description": "Verify that the API can create a new product successfully.\n\nRequest data:\n\n- Title: QA Test Product\n    \n- Price: 100000\n    \n- Category: test\n    \n\nExpected result:\n\n- HTTP status code: 201\n    \n- Product title matches the submitted data"
       },
       "response": []
     },
@@ -157,12 +157,13 @@
             "products",
             "1"
           ]
-        }
+        },
+        "description": "Verify that an existing product can be updated successfully.\n\nRequest data:\n\n- Product ID: 1\n    \n- Updated title: Updated QA Product\n    \n\nExpected result:\n\n- HTTP status code: 200\n    \n- Product title is updated correctly"
       },
       "response": []
     },
     {
-      "name": "Product",
+      "name": "Delete Product",
       "event": [
         {
           "listen": "test",
@@ -188,7 +189,8 @@
             "products",
             "1"
           ]
-        }
+        },
+        "description": "Verify that the API processes a product deletion request successfully.\n\nRequest data:\n\n- Product ID: 1\n    \n\nExpected result:\n\n- HTTP status code: 200\n    \n- isDeleted is true"
       },
       "response": []
     },
@@ -228,7 +230,8 @@
             "auth",
             "login"
           ]
-        }
+        },
+        "description": "Verify that valid user credentials can generate an access token successfully.\n\nRequest data:\n\n- Username: emilys\n    \n- Password: emilyspass\n    \n\nExpected result:\n\n- HTTP status code: 200\n    \n- Access token is generated\n    \n- Access token is not empty"
       },
       "response": []
     },
@@ -278,7 +281,8 @@
             "auth",
             "me"
           ]
-        }
+        },
+        "description": "Verify that an authenticated user can access a protected endpoint using a valid access token.\n\nAuthentication:\n\n- Bearer Token\n    \n- Token source: {{accessToken}}\n    \n\nExpected result:\n\n- HTTP status code: 200\n    \n- Authenticated user data is returned\n    \n- Username matches the expected user: emilys"
       },
       "response": []
     }
